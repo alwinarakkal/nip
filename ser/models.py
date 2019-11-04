@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
+
 # Create your models here.
 class Post(models.Model):
 
     aut = models.CharField(max_length=255 )
-    flat_number = models.CharField(max_length=30)  
+    flat_number = models.CharField(max_length=10)  
 
    
     time = models.CharField(max_length=255 )
@@ -27,7 +28,12 @@ class Item(models.Model):
 
 
 class Quantity(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.CharField(max_length=50)
     qu = models.IntegerField()
     t = models.ForeignKey('Item', on_delete=models.CASCADE)
     flat_number = models.CharField(max_length=30)
+    # created = models.DateField(auto_now_add=True)
+
+    # flat_number = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    

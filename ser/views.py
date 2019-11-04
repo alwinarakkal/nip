@@ -38,24 +38,24 @@ def req(request):
 @login_required
 def shop(request):                                             
     items = Item.objects.all()
+    aut=request.user.username
     current_user=request.user
-    print(current_user)
+    obj=UserProfile.objects.get(user=current_user)
+    flat_number=obj.flat_number
+    print(flat_number)
     if request.method == "POST":
-        form = buy(request.POST)     #neww for admin login
-        
-        print (form)
+        form = buy(request.POST,initial={'author':aut,'flat_number':flat_number})     #neww for admin login
         if form.is_valid():
             
             form.save()
-            # return redirect('gmail')
+            return redirect('index')
 
     else:
-        form = buy()
+        form = buy(initial={'author':aut,'flat_number':flat_number})
     context = {
         'form':form,
         'items':items,
-        'current_user':current_user,
-        
+        'current_user':current_user,  
     }
     
     return render(request, 'buy2.html', context)
@@ -200,7 +200,7 @@ class ServiceListView(ListView):
 @login_required
 def MyView(request):                #display ordered items
 
-    query_results = Item.objects.all().order_by('-created')
+    query_results = Post.objects.all().order_by('-created')
     aut=request.user.username
 
    

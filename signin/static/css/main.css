@@ -1922,8 +1922,9 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .table-shopping-cart .column-1 {
-  width: 133px;
+  width: 300px;
   padding-left: 50px;
+  padding-right: 100px;
 }
 
 .table-shopping-cart .column-2 {

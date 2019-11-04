@@ -31,42 +31,13 @@
 		
 		{% for x in details %}
 					
-					{% if  user.username == x.aut %}
-					{% if x.bread or x.water or x.milk or x.rice %}
-
-					<tr>
-					<td><b>DATE : </b>{{ x.created }}</td> 
-					<td style="color:black">ORDERED ITEMS :</td>
-					{% if x.get_total %}
-				<td style="color:green"> <b>Total :</b> ₹ {{ x.get_total }}</td>
-
-					{% if x.bread %}
-					<td>{{x.bread}} PACKET BREAD,</td>	
-					{% endif %}
-					{% if x.water %}
-					
-					<td>{{x.water}} CAN WATER,</td>	
-					{% endif %}
-					
-
-
-					{% if x.milk  %}
-					
-					<td>{{x.milk}}  PACKET MILK,</td>	
-					{% endif %}
-
-					{% if x.rice  %}
-					
-					<td>{{x.rice}} kg RICE,</td>	
-					{% endif %}
-
-					{% endif %}	
-					{% endif %}	
-					<br>
-					
-				{% endif %}
+				
+				
 		{% endfor %}
+		{{details}}
 		 </tr>
+		}
+		}
 </tbody>
 	</div></table></div>
 

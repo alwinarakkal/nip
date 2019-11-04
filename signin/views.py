@@ -55,7 +55,7 @@ def index(request):
                 mobile_number='unknown'
                 first_name='unknown'
 
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=4f3755118604d970d9bd420b4d9e1f11'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=4f3755118604d970d9bd420b4d9e1f11'
     city='Kochi'
     r = requests.get(url.format(city)).json()
     # print(r)
@@ -64,7 +64,7 @@ def index(request):
         'temperature' : r['main']['temp'],
         'description' : r['weather'][0]['description'],
         'icon' : r['weather'][0]['icon'],
-        'wind':r['wind']['speed'],
+        
         
     }
 

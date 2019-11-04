@@ -81,32 +81,103 @@
 			{% endfor %}
 
 		];
-		
-
-		
-
-
+	
 
 	</script>
 
 
-
-	<form class="bg0 p-t-80 p-b-85" method="POST" >
+<div class="jumbotron" style="background-color:#a3c2c2">
+	<h1 style="font-family: 'Cormorant', serif;"><br><center>Order Now</center></h1>
+    
+</div>
+ 
+	<form class=" form-signin p-b-30" method="POST" >
 		 {% csrf_token %}
-		
-		 <!-- {{form.as_p}} -->
-		 <!-- <input name="author" type="text" id = "id_author"value = {{current_user}}  >.
-		  
-		  Item:<input name="t" type="text" id = "id_t"value= {{item}}>
-		  Q:<input name="qu" id = "id_qu" >
-		  flat : <input name="flat_number" id = "id_flat_number"> -->
-		{{form}}
-		<hr />
+
+		 <div class="form-group" style="visibility:hidden">
+             
+                 {% render_field form.flat_number  type="text" class="form-control" placeholder="flat"%}
+                {% render_field form.author  type="text" class="form-control" placeholder="flat"%}
+              <!--    <input name="author" value={{current_user}}> -->
+              </div>
 
 
-		  <input type="submit" onclick="this.disabled=true">
+
+
+
+
+  
+		<div class="container" >
+			<div class="row">
+				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+					<div class="m-l-25 m-r--38 m-lr-0-xl">
+						<div class="wrap-table-shopping-cart">
+							<table class="table-shopping-cart">
+								<tr class="table_head">
+									<th class="column-1">Product</th>
+									<th class="column-2">Brand</th>
+									<th class="column-3">Price</th>
+									<th class="column-4">Quantity</th>
+									
+								
+								</tr>
+
+								<tr class="table_row">
+									<td class="column-1">
+										
+											{% render_field form.t  type="text" class="form-control" placeholder="aut"%}
+										
+									</td>
+									<td class="column-2"><p id='item_brand'></p></td>
+									<td class="column-3">	<p id="item_price"></p></td>
+									<td class="column-4">
+									 <span class="minus">-</span>
+					<input  name="qu" value="0"/>
+					
+					<span class="plus" onclick="document.getElementById('b').style.visibility='visible'">+</span>
+                
+          </div>
+									</td>
+								
+								</tr>
+
+								
+									
+								
+							</table>
+						</div>
+
+
+
+							<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"  type="submit"  onclick="this.disabled=true" value="Submit" style="visibility:hidden" id="b">
+							Place Order
+						</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</form>
-		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<div>
 		<p id="item_name"></p>
 		<p id="item_price"></p>
