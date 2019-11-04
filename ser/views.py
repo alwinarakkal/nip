@@ -1,13 +1,14 @@
 from django.shortcuts import render,redirect
 from signin.models import UserProfile                   #neww222
 from signin.forms import ExtendedUserCreationForm, UserProfileForm #neww222
-from .models import Post,Item
+from .models import Service,Item,Quantity
 from django.db.models import Q
 # Create your views here.
 from django.views.generic import ListView, DetailView, View
 from .forms import ser_req
 from .forms import buy
 from django.core.paginator import Paginator
+from datetime import date,timedelta
 
 #for email
 from django.core.mail import send_mail
@@ -42,13 +43,13 @@ def shop(request):
     current_user=request.user
     obj=UserProfile.objects.get(user=current_user)
     flat_number=obj.flat_number
-    print(flat_number)
+    
     if request.method == "POST":
         form = buy(request.POST,initial={'author':aut,'flat_number':flat_number})     #neww for admin login
         if form.is_valid():
             
             form.save()
-            return redirect('index')
+            return redirect('gmail')
 
     else:
         form = buy(initial={'author':aut,'flat_number':flat_number})
@@ -73,7 +74,7 @@ def serv_mail(request):
     y=str(mobile_number)
     
     
-    obj2=Post.objects.last()
+    obj2=Service.objects.last()
     msg=obj2.body
     p=str(msg)
 
@@ -86,6 +87,7 @@ def serv_mail(request):
     message=z
     email_from = settings.EMAIL_HOST_USER
     recipient_list = ['aalwinarakkal@gmail.com',mail] 
+    
     send_mail( subject, message, email_from, recipient_list )    
     return redirect('show')
 
@@ -102,42 +104,15 @@ def shopmail(request):
     y=str(mobile_number)
     
     # obj2=Post.objects.filter(aut=current_user).order_by('created')[:1]
-    obj2=Item.objects.last()
-    if(obj2.bread):
+    obj2=Quantity.objects.last()
+    item=str(obj2.t)
+    quantity=str(obj2.qu)
 
-        sel1=str(obj2.bread)
-       
-        b= sel1+ " PACKET BREAD "+"\n"
-    else:
-        b=""
-    if(obj2.water):
-        sel2=str(obj2.water)
-       
-        w=sel2+ " CAN WATER ,"+"\n"
-    else:
-        w=""
-    
-    if(obj2.milk):
-
-        sel3=str(obj2.milk)
-        
-        m=sel3+  " PACKET MILK "+"\n"
-       
-    else:
-        m=""
-    if(obj2.rice):
-
-        sel4=str(obj2.rice)
-        
-        r=sel4+" kg RICE "+"\n"
-       
-    else:
-        r=""
     
     z="FLAT NUMBER :"+x+"\n"+"MOBILE NUMBER :"+y+"\n"
     
     
-    shoppinglist=(z+" ITEM LIST :"+"\n"+b+w+m+r)
+    shoppinglist=(z+" Order Summary:"+"\n"+"Quantity : "+quantity +",  Item : "+item)
     
     context = {
         'details':shoppinglist
@@ -150,19 +125,19 @@ def shopmail(request):
     message=shoppinglist
     email_from = settings.EMAIL_HOST_USER
     recipient_list = ['aalwinarakkal@gmail.com',mail] 
-    print (obj2.bread or obj2.bread )
-    if (obj2.bread or obj2.water or obj2.milk or obj2.rice):
+    
+    if (obj2.qu):
         send_mail( subject, message, email_from, recipient_list )    
     
    
     
-    return redirect('list')
+    return redirect('/shop')
 
 @login_required
 def Myreqview(request):              #display service requests
 
    
-    req=Post.objects.all().order_by('-created')
+    req=Service.objects.all().order_by('-created')
     aut=request.user.username
     info=[]
     for x in req:
@@ -187,24 +162,28 @@ def Myreqview(request):              #display service requests
     return render(request,'show.html',context)
 
 class ServiceListView(ListView):
-    model = Post
+    model = Service
     template_name = 'show2.html'
 
     def get_queryset(self):
 
         category5= self.kwargs.get('category')
     
-        return Post.objects.filter(created=category5)
+        return Service.objects.filter(created=category5)
 
         
 @login_required
 def MyView(request):                #display ordered items
-
-    query_results = Post.objects.all().order_by('-created')
+    startdate = date.today()
+    enddate = startdate + timedelta(days=7)
+    # .filter(date__range=[startdate, enddate])
+    query_results = Quantity.objects.all().order_by('-created')
     aut=request.user.username
-
+    info=[]
    
-   
+    for x in query_results:
+        y={'flnum':x.created,'aut':x.author,'aut2':aut}
+        info.append(y)
    
     paginator=Paginator(query_results,5)
     try:
@@ -217,10 +196,20 @@ def MyView(request):                #display ordered items
         query_results=paginator.page(paginator.num_pages)
                                                         #/pagination
     context = {
-        'details':query_results,
-        'aut':aut
+        'info':info,
+        
     }
     return render(request, 'display.html',context)
+
+class ShopListView(ListView):
+    model = Quantity
+    template_name = 'display2.html'
+
+    def get_queryset(self):
+        
+        category6= self.kwargs.get('category')
+    
+        return Quantity.objects.filter(created=category6)
 
 
 
@@ -246,7 +235,7 @@ class CategoryListView(ListView):
     def get_queryset(self):
 
         category = self.kwargs.get('category')
-    
+
         return UserProfile.objects.filter(flat_number=category)
 
 

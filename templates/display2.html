@@ -15,7 +15,7 @@
 <body>
 
 <div class="jumbotron" style="background-color:#a3c2c2">
-	<h1 style="font-family: 'Cormorant', serif;"><br><center>REQUESTED SERVICE</center></h1>
+	<h1 style="font-family: 'Cormorant', serif;"><br><center>ORDERED ITEMS</center></h1>
     <!-- <hr>
     <h3><a class="btn btn-primary  pl " href="/req" style="float:left">BACK</a></h3> -->
 </div>
@@ -24,16 +24,48 @@
 
 
 <div class="row">
-  <div class="col-md-2"></div>
+  <div class="col-md-3">&nbsp</div>
 
-{% for order in object_list %}
-<div  class="col-md-7" style="color:white">
-    <!-- <h2 class="ltext-108 cl2 hov-cl1 trans-04">Service Date : {{ order.time }}</h2> -->
+
+
+<div class="card p-3" style="width:50%">
+<table class="table table-bordered table-striped table-hover table-responsive" style="border-width: 10px">
+
+  <div class="row pl" >
     
-    <div class="card p-3 m-t-30">
-      <p style="background: black ; padding: 1%; margin :2%; color:lightgray"><b> Service Date : </b>  {{ order.time }}</p>
-    <p style="background: black ; padding: 1%; margin :2%; color:lightgray"><b> Service request : </b>  {{ order.body }}</p>
-    </div>
-    {% endfor %}
+      <tbody>
+    
+    
+  {% for order in object_list %}
+    
+      
+        
+          
+          <tr>
+                <td > 
+                <b> Item : </b> {{ order.t }}</td>
+                <td>
+
+                <b>Quantity: </b>  {{ order.qu }}
+    
+                       
+                    
+               </td>
+              
+           </tr> 
+
+        
+      
+    {% endfor %}  
+    
+    
+</tbody>
+  </div></table></div>
+
+
+
+
+
+
   <div class="col-md-2"></div>
 	{% endblock %}

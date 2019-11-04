@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import UserProfile
-from ser.models import Item,Post                                   ######for admin login
+from ser.models import Item,Service                                   ######for admin login
 from django.views.generic import ListView, DetailView, View
 from django.core.paginator import Paginator
 from .forms import ExtendedUserCreationForm, UserProfileForm,Editprofile
@@ -101,7 +101,7 @@ def deliver_item(request):
 @login_required
 def deliver_service(request):
 
-        order_list=Post.objects.all().order_by('-created')
+        order_list=Service.objects.all().order_by('-created')
         info=[]
         for x in order_list:
             y={'flnum':x.flat_number}
@@ -141,7 +141,7 @@ class caretaker(LoginRequiredMixin,ListView):
 class caretaker2(LoginRequiredMixin,ListView):
     login_url = '/index/'
    
-    model = Post
+    model = Service
     template_name = 'received_orders2.html'
     
     def get_queryset(self):
@@ -150,7 +150,7 @@ class caretaker2(LoginRequiredMixin,ListView):
         # print (category)
         
         
-        return Post.objects.filter(flat_number=category)
+        return Service.objects.filter(flat_number=category)
 
 
 

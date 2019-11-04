@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment,Article
+from .models import Comment,Post
 from django.contrib.auth.models import User
 
 class CommentForm(forms.Form):
@@ -22,5 +22,5 @@ class CommentForm(forms.Form):
 
 class AskForm(forms.ModelForm):
     class Meta:
-        model = Article
+        model = Post
         fields = ['title','body','aut']

@@ -29,15 +29,30 @@
 		
 			<tbody>
 		
-		{% for x in details %}
+		
+		{% for y in info %}
+		
+			{% if  y.aut2 == y.aut %}		
+				
 					
+					<tr>
+								<td style="line-height: 5"> 
+								<b>	DATE: </b></td>
+								<td>
+
+	
+    
+                        <a class="nav-link" href= "{% url 'shop_view' y.flnum %}" style="font-size: 30px">{{y.flnum}}</a>
+                    
+							 </td>
+							
+			 		 </tr> 
 				
-				
-		{% endfor %}
-		{{details}}
-		 </tr>
-		}
-		}
+				{% endif %}		
+					
+		{% endfor %}	
+		
+		
 </tbody>
 	</div></table></div>
 

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 
 # Create your models here.
-class Post(models.Model):
+class Service(models.Model):
 
     aut = models.CharField(max_length=255 )
     flat_number = models.CharField(max_length=10)  
@@ -33,7 +33,8 @@ class Quantity(models.Model):
     qu = models.IntegerField()
     t = models.ForeignKey('Item', on_delete=models.CASCADE)
     flat_number = models.CharField(max_length=30)
-    # created = models.DateField(auto_now_add=True)
+    created= models.DateField(auto_now_add=True)
+    time1 = models.DateTimeField(auto_now_add=True)
 
     # flat_number = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     

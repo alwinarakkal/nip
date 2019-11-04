@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Article,Comment
+from .models import Post,Comment
 from django.views.generic import UpdateView,DeleteView
 from .forms import CommentForm,AskForm
 from django.contrib.auth.models import User
@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 # @login_required
 def blog_index(request):
-    posts = Article.objects.all().order_by('-created_on')
+    posts = Post.objects.all().order_by('-created_on')
                                                         #pagination
     paginator=Paginator(posts,3)
     try:
@@ -28,7 +28,7 @@ def blog_index(request):
     
 @login_required
 def blog_detail(request, pk):
-    post = Article.objects.get(pk=pk)
+    post = Post.objects.get(pk=pk)
     print(request.user.username)
     form = CommentForm()
     if request.method == 'POST':
@@ -80,14 +80,14 @@ def Ask_Form(request):
 
 class post_update(UpdateView):
 
-    model = Article
+    model = Post
     form_class = AskForm
     template_name = 'ask.html'
     success_url = '/h'
 
 
 class post_delete(DeleteView):
-    model = Article
+    model = Post
     template_name = 'board_element_confirm_delete.html'
     success_url = '/h'
 
