@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+
+
+<body>
+
+
+
+<section class="bg0 p-t-104 p-b-116">
+    <div class="container">
+      <div class="flex-w flex-tr">
+        <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+          <h3 style="margin-left: auto;
+    margin-right: auto;font-family: Kaushan Script;" > Hii {{ first_name}}</h3>
+
+    <div class="card pl" style="height:60%;width:50%;margin-left: 30%;background-color: white">
+  
+  <img src="{{ pic.url }}" >
+  <a href="/update">
+              <button class="flex-c-m stext-101 cl0 size-125 bg5 bor2 hov-btn3 p-lr-15 trans-04 m-t-30" >
+                                    Edit Profile
+                                </button>
+    </a>
+  
+  </div>
+  
+    
+        </div>
+
+        <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
+          <div class="flex-w w-full p-b-42">
+            <span class="fs-18 cl5 txt-center size-211">
+            <span class="lnr lnr-user"></span>
+            </span>
+
+            <div class="size-212 p-t-2">
+              <span class="mtext-110 cl2">
+                Username : {{username}}
+              </span>
+              <p class="stext-115 cl6 size-213 p-t-18">
+              <span class="mtext-110 cl2">
+                First Name : {{first_name}}
+              </span></p>
+              <p class="stext-115 cl6 size-213 p-t-18">
+              <span class="mtext-110 cl2">
+                Last Name : {{last_name}}
+              </span></p>
+              
+            </div>
+            
+          </div>
+
+          <div class="flex-w w-full p-b-42">
+            <span class="fs-18 cl5 txt-center size-211">
+              <span class="lnr lnr-phone-handset"></span>
+            </span>
+
+            <div class="size-212 p-t-2">
+              <span class="mtext-110 cl2">
+                Mobile Number
+              </span>
+
+              <p class="stext-115 cl1 size-213 p-t-18">
+                {{mobile_number}}
+              </p>
+            </div>
+
+          </div>
+          <div class="flex-w w-full p-b-42">
+            <span class="fs-18 cl5 txt-center size-211">
+              <span class="lnr lnr-apartment"></span>
+            </span>
+
+            <div class="size-212 p-t-2">
+              <span class="mtext-110 cl2">
+                Flat Number
+              </span>
+
+              <p class="stext-115 cl1 size-213 p-t-18">
+                {{flat_number}}
+              </p>
+            </div>
+            
+          </div>
+
+
+          <div class="flex-w w-full">
+            <span class="fs-18 cl5 txt-center size-211">
+              <span class="lnr lnr-envelope"></span>
+            </span>
+
+            <div class="size-212 p-t-2">
+              <span class="mtext-110 cl2">
+                Email
+              </span>
+
+              <p class="stext-115 cl1 size-213 p-t-18">
+                {{email}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  
+  
+
+
+      </body>
+{% endblock %}

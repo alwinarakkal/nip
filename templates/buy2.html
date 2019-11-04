@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Shoping Cart</title>
+	<meta charset="UTF-8">
+</head>
+
+<style type="text/css">
+		span {cursor:pointer; }
+		
+		.minus, .plus{
+			width:30px;
+			height:38px;
+			background: #8080ff;
+			border-radius:4px;
+			padding:8px 5px 8px 5px;
+			border:1px solid #262323;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      color:black;
+		}
+		input{
+			height:40px;
+      width: 80px;
+      text-align: center;
+      font-size: 26px;
+			border:5px solid #2f2626;
+			border-radius:4px;
+      display: inline-block;
+      vertical-align: middle;
+		}	
+</style>
+		
+	<body>
+				<script type="text/javascript">
+			$(document).ready(function() {
+			$('.minus').click(function () {
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 0 ? 0 : count;
+				$input.val(count);
+				$input.change();
+				return false;
+			});
+			$('.plus').click(function () {
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+				return false;
+			});
+			document.getElementById('id_t').onchange = function(){
+			var select = document.getElementById('id_t');
+			var selectval = select.options[select.selectedIndex].value;
+			console.log(selectval);
+			for(var i=0; i<details.length;i++){
+				if(details[i].itemname == selectval){
+					document.getElementById('item_name').innerText = details[i].itemname;
+					document.getElementById('item_price').innerText = details[i].price;
+					document.getElementById('item_brand').innerText = details[i].brand_name;
+				}
+			}
+		}
+		});	
+
+		var details = [
+
+			{% for item in items %}
+				{
+					'itemname': '{{item.item_name}}',
+					'price': '{{item.price}}',
+					'brand_name':'{{item.brand}}'
+				},
+			{% endfor %}
+
+		];
+		
+
+		
+
+
+
+	</script>
+
+
+
+	<form class="bg0 p-t-80 p-b-85" method="POST" >
+		 {% csrf_token %}
+		
+		 <!-- {{form.as_p}} -->
+		 <!-- <input name="author" type="text" id = "id_author"value = {{current_user}}  >.
+		  
+		  Item:<input name="t" type="text" id = "id_t"value= {{item}}>
+		  Q:<input name="qu" id = "id_qu" >
+		  flat : <input name="flat_number" id = "id_flat_number"> -->
+		{{form}}
+		<hr />
+
+
+		  <input type="submit">
+	</form>
+		
+	<div>
+		<p id="item_name"></p>
+		<p id="item_price"></p>
+		<p id='item_brand'></p>
+	</div>
+		
+		
+	
+		
+
+
+
+</body>
+</html>
+
+
+
+{% endblock %}

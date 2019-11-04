@@ -1,0 +1,63 @@
+{% extends "base3.html" %}
+{% load static %}
+
+{% block page_content %}
+
+
+<body>
+
+
+
+<div class="row " style="margin-top: 10%">
+  <div class="col-md-3"></div>
+
+<div  class="col-md-5" style="color:black">
+    <h1 class="ltext-108 cl2 hov-cl1 trans-04 p-b-10" style="text-align: center;"> Ordered Residents</h1>
+    
+       
+  
+    </small>
+    {% for y in info %}
+    <div class="card p-3 m-t-15" style="background-color: lightgray">
+
+	<li class="btn">
+                       
+                        <a class="nav-link" href= "{% url 'caretaker' y.flnum %}" style="font-size: 30px"><span class="lnr lnr-apartment">{{y.flnum}}</span></a>
+                    </li>
+               
+
+
+    </div>
+{% endfor %}
+
+
+
+
+
+
+
+  <div class="col-md-3"></div>
+  <div class="pagination p-t-30"  style="left: 0; bottom: 5%; width: 100%;z-index:3;">
+        <ul style="margin-left: 45%">
+          
+          {% if info.has_previous %}
+          <li style="display:inline-flex"><a href="?page={{ info.previous_page_number }}" style="color:#1a75ff"><strong><<</strong> &nbsp &nbsp</a></li>
+          {% endif %}
+          {% for pg in info.paginator.page_range %}
+          {% if info.number == pg %}
+      <a href="?page={{ pg }}" style="color:#1a75ff">{{ pg }}</a>
+        
+          {% endif %}
+          {% endfor %}
+          {% if info.has_next %}
+          <li style="display:inline-flex"><a href="?page={{ info.next_page_number }}" style="color:#1a75ff"><strong>&nbsp &nbsp >></strong>   </a></li>
+          {% endif %}
+        </ul>
+    </div>
+
+</body>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block page_content %}
+{% load widget_tweaks %}
+<body>
+  <div class="jumbotron" style="background-color:#a3c2c2">
+  <h1><br><center>EDIT PROFILE</center></h1>
+    <hr>
+    <h3><a class="btn btn-primary  pl " href="/profile" style="float:left">Back</a></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+<form method="POST" >
+    {% csrf_token %}
+       <div class="form-group cl pl" >
+        first name:{% render_field form.first_name  type="text" class="form-control" placeholder="first name" required="" %}
+      </div>
+      <div class="form-group cl pl">
+         last name:{% render_field form.last_name  type="text" class="form-control" placeholder="last name" required="" %}
+      </div>
+       <div class="form-group cl pl" >
+       username: {% render_field form.username  type="text" class="form-control" placeholder="username" required="" %}
+    </div>
+
+    <div class="form-group cl pl">
+      email:{% render_field form.email  type="email" class="form-control" placeholder="email" required="" %}
+  </div>
+  <div class="form-group cl pl" >
+      flat number:{% render_field form1.flat_number  type="text" class="form-control" placeholder="flat number" required="" %}
+  </div>
+
+
+  <div class="form-group cl pl">
+      mobile number:{% render_field form1.mobile_number  type="number" class="form-control" placeholder="mobile number" required="" %}
+  </div>
+   
+
+                <div class=" cl pl"> &nbsp</div>
+     
+
+    <div class="form-group cl pl">
+        <input type="submit" value="Submit" class="btn button ">
+        <br><hr>
+      </div> 
+   
+
+      
+</form>
+</div>
+ <div class="col-md-4" ></div>
+      </div>
+
+
+        <ul style="color:red">
+            {% for field in form %}
+                {% if field.errors %}<li><center><br>{{ field.label }}: {{ field.errors|striptags }}<center></li>{% endif %}
+            {% endfor %}
+
+        </ul>
+
+</body>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block page_content %}
+
+
+{% load widget_tweaks %}
+
+
+<head>
+  <title>shop</title>
+  <meta charset="utf-8">
+   <link rel="stylesheet" href="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' %}" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+   
+ </head>
+
+<body>
+
+<div class="jumbotron" style="background-color:#a3c2c2">
+	<h1 style="font-family: 'Cormorant', serif;"><br><center>ORDERED ITEMS</center></h1>
+    
+    <!-- <h3><center><a class="btn btn-primary  pl " href="/shop" style="float:left">BACK</a></center></h3> -->
+</div>
+<div class="container-fluid" style="padding-left: 5%;padding-right: 5%;">
+<div class="card p-3">
+<table class="table table-bordered table-striped table-hover table-responsive" style="border-width: 10px">
+
+	<div class="row pl" >
+		
+			<tbody>
+		
+		{% for x in details %}
+					
+					{% if  user.username == x.aut %}
+					{% if x.bread or x.water or x.milk or x.rice %}
+
+					<tr>
+					<td><b>DATE : </b>{{ x.created }}</td> 
+					<td style="color:black">ORDERED ITEMS :</td>
+					{% if x.get_total %}
+				<td style="color:green"> <b>Total :</b> ₹ {{ x.get_total }}</td>
+
+					{% if x.bread %}
+					<td>{{x.bread}} PACKET BREAD,</td>	
+					{% endif %}
+					{% if x.water %}
+					
+					<td>{{x.water}} CAN WATER,</td>	
+					{% endif %}
+					
+
+
+					{% if x.milk  %}
+					
+					<td>{{x.milk}}  PACKET MILK,</td>	
+					{% endif %}
+
+					{% if x.rice  %}
+					
+					<td>{{x.rice}} kg RICE,</td>	
+					{% endif %}
+
+					{% endif %}	
+					{% endif %}	
+					<br>
+					
+				{% endif %}
+		{% endfor %}
+		 </tr>
+</tbody>
+	</div></table></div>
+
+</div>
+		<div class="pagination p-t-30"  style="left: 0; bottom: 5%; width: 100%;z-index:3;">
+				<ul style="margin-left: 45%">
+					
+					{% if details.has_previous %}
+					<li style="display:inline-flex"><a href="?page={{ details.previous_page_number }}" style="color:#1a75ff"><strong><<</strong> &nbsp &nbsp</a></li>
+					{% endif %}
+					{% for pg in details.paginator.page_range %}
+					{% if details.number == pg %}
+			<a href="?page={{ pg }}" style="color:#1a75ff">{{ pg }}</a>
+				
+					{% endif %}
+					{% endfor %}
+					{% if details.has_next %}
+					<li style="display:inline-flex"><a href="?page={{ details.next_page_number }}" style="color:#1a75ff"><strong>&nbsp &nbsp >></strong>   </a></li>
+					{% endif %}
+				</ul>
+		</div>
+
+	{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+
+{% load widget_tweaks %}
+
+
+<head>
+	<title>home</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+</head>
+	<div class="sec-banner bg0 p-t-130 p-b-05 ">
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+					<!-- Block1 --><span class="block1-name ltext-102 trans-04 p-b-8">
+									Shop Now
+								</span>
+					<div class="block1 wrap-pic-w">
+						<img src="{% static 'images/gro.png' %}" alt="IMG-BANNER">
+
+						<a href="/shop" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+							<div class="block1-txt-child1 flex-col-l">
+							
+							</div>
+
+							<div class="block1-txt-child2 p-b-4 trans-05">
+								<div class="block1-link stext-101 cl0 trans-09">
+									Shop Now
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+					<!-- Block2 --><span class="block1-name ltext-102 trans-04 p-b-8">
+									Need Services?
+								</span>
+					<div class="block1 wrap-pic-w">
+						<img src="{% static 'images/serv.png' %}" alt="IMG-BANNER">
+
+						<a href="/req" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+							<div class="block1-txt-child1 flex-col-l">
+								
+							</div>
+
+							<div class="block1-txt-child2 p-b-4 trans-05">
+								<div class="block1-link stext-101 cl0 trans-09">
+									Services at your fingertips
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+					<!-- Block3 --><span class="block1-name ltext-102 trans-04 p-b-8">
+									Notices
+								</span>
+					<div class="block1 wrap-pic-w">
+						<img src="{% static 'images/noti.png' %}" alt="IMG-BANNER" >
+
+						<a href="/h" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+							<div class="block1-txt-child1 flex-col-l">
+								
+							</div>
+
+							<div class="block1-txt-child2 p-b-4 trans-05">
+								<div class="block1-link stext-101 cl0 trans-09">
+									View Now
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+ <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    
+                    <div class="box  ">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content ">
+                               <!--  <div class="content"> -->
+                                    <p>
+                                        <span class="title"  style="font-family: Kaushan Script;color:  #9999ff;">{{ city_weather.city }}</span>
+                                        <br><br>
+                                        <span class="subtitle" >{{ city_weather.temperature }}° F</span>
+                                        <br > {{ city_weather.description }}
+                                        <br>Wind - {{ city_weather.wind }}mph 
+
+                                    </p>
+                                <!-- </div> -->
+                            </div>
+                        </article>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+</html>
+
+
+
+{% endblock %}

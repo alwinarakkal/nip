@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+
+{% load widget_tweaks %}
+
+
+
+ <body>
+
+<div class="jumbotron" style="background-color:#a3c2c2">
+  <h1 style="font-family: 'Cormorant', serif;"><br><center>SERVICE</center></h1>
+  
+
+</div>
+
+
+        <div class="row">
+          <div class="col-md-3"></div>
+
+             <form class="form-signin pl" method="POST" >
+                 {% csrf_token %}
+                 <div class="form-group"  style="  visibility: hidden;">
+                  {% render_field form.aut  type="text" class="form-control" placeholder="Title"%}
+                  {% render_field form.flat_number  type="text" class="form-control" placeholder="flat"%}
+              </div>
+                <div class="form-group"  >
+             <input type="text" name="time" class="form-control" placeholder="Preferred time ">
+                
+              </div>
+             <div class="form-group"  >
+                <textarea placeholder="Service Description" rows="5" cols="60" class="form-control" name="body" ></textarea>
+                 
+                   
+              </div>
+            
+          <hr />
+            <input type="submit" value="Submit" class="button" style="display:inline">
+               </form>
+               <div class="col-md-3"></div></div>
+             </div>
+                   </body>
+      </body>
+{% endblock %}

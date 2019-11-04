@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+
+{% load widget_tweaks %}
+
+
+<head>
+  <title>service</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' %}" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+ </head>
+<body>
+
+<div class="jumbotron" style="background-color:#a3c2c2">
+	<h1 style="font-family: 'Cormorant', serif;"><br><center>REQUESTED SERVICES</center></h1>
+    <!-- <hr>
+    <h3><a class="btn btn-primary  pl " href="/req" style="float:left">BACK</a></h3> -->
+</div>
+<div class="container-fluid" style="padding-left: 10%;padding-right: 10%;">
+<div class="card p-3">
+<table class="table table-bordered table-striped table-hover table-responsive" style="border-width: 10px">
+
+	<div class="row pl " >
+		
+			<tbody>
+	
+		{% for x in details %}
+					
+				{% if  user.username == x.aut %}
+					
+					<tr>
+								<td> 
+								<b>DATE : </b>{{ x.created }}
+							 </td>
+							 <td> 
+								<b>TIME : </b>{{ x.time }}
+							 </td>		
+						<td style="color:black">SERVICE REQUESTED :</td> 
+						
+       					  <td> 
+								{{ x.body }}
+							 </td>			 
+			 		 </tr> 
+				{% endif %}	
+					
+				
+		{% endfor %}
+		
+		
+		</tbody></table>
+	</div></body>	
+	
+
+	</div>
+	<div class="pagination p-t-30"  style=" left: 0; bottom: 5%; width: 100%;z-index:3;">
+				<ul style="margin-left: 45%">
+		
+			
+			{% if details.has_previous %}
+			<li style="display:inline-flex"><a href="?page={{ details.previous_page_number }}" style="color:#1a75ff"><strong><<</strong> &nbsp &nbsp</a></li>
+			{% endif %}
+			{% for pg in details.paginator.page_range %}
+			{% if details.number == pg %}
+	<a href="?page={{ pg }}" style="color:#1a75ff">{{ pg }}</a>
+		
+			{% endif %}
+			{% endfor %}
+			{% if details.has_next %}
+			<li style="display:inline-flex"><a href="?page={{ details.next_page_number }}" style="color:#1a75ff"><strong>&nbsp &nbsp >></strong>   </a></li>
+			{% endif %}
+		</ul>
+</div>
+
+	{% endblock %}

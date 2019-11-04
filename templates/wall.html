@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+
+<div class="jumbotron" style="background-color:#a3c2c2">
+  <h1 style="font-family: 'Cormorant', serif;"><br><center>Notices</center></h1>
+    <hr>
+     <h3><center><a class="btn btn-success  pl " href="/Ask"  style="float:left">ADD</a></center></h3>
+    
+</div>
+
+
+<br>
+
+ 
+    <div class="container" style="margin-left: 15%;">
+      <div class="row">
+        <div class="col-md-8 col-lg-9 p-b-80">
+          <div class="p-r-45 p-r-0-lg card p-b-30" >
+
+    {% for post in posts %}
+
+
+    <div class="p-t-32  ">
+                <h4 class="p-b-15" style="padding-left: 3%">
+                  <a href="{% url 'b_detail' post.pk%}" class="ltext-108 cl2 hov-cl1 trans-04">
+                    {{ post.title }}
+                  </a>
+                </h4>
+
+                <p class="stext-117 cl6"style="padding-left: 3%">
+                 {{ post.body |slice:170  }}
+                </p>
+
+                <div class="flex-w flex-sb-m p-t-18"style="padding-left: 3%">
+                  <span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
+                    <span>
+                      <span class="cl4">By</span> {{post.aut }}  
+                      <span class="cl12 m-l-4 m-r-6">|</span>
+                    </span>
+
+                    <span >
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+
+                      {{post.created_on.date }} 
+                      
+                    </span>
+
+                  </span>
+
+                  <a href="{% url 'b_detail' post.pk%}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10"style="padding-left: 3%">
+                    Continue Reading
+
+                    <i class="fa fa-long-arrow-right m-l-9"></i>
+                  </a>
+                </div>
+
+    {% endfor %}
+ 
+</div></div></div></div></div>
+
+
+<div class="pagination p-t-30"  style="left: 0; bottom: 5%; width: 100%;z-index:3;">
+        <ul style="margin-left: 40%">
+        
+        {% if posts.has_previous %}
+        <li style="display:inline-flex"><a href="?page={{ posts.previous_page_number }}" style="color:#1a75ff"><strong><<</strong> &nbsp &nbsp</a></li>
+        {% endif %}
+        {% for pg in posts.paginator.page_range %}
+        {% if posts.number == pg %}
+<a href="?page={{ pg }}" style="color:#1a75ff"><b>{{ pg }}</b></a>
+    
+        {% endif %}
+        {% endfor %}
+        {% if posts.has_next %}
+        <li style="display:inline-flex"><a href="?page={{ posts.next_page_number }}" style="color:#1a75ff"><strong>&nbsp &nbsp >></strong>   </a></li>
+        {% endif %}
+    </ul>
+</div>
+
+
+
+{% endblock %}

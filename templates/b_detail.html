@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+
+
+<div class="jumbotron" style="background-color:#a3c2c2">
+    <h1 style="font-family: 'Cormorant', serif;"><br><center>Details</center></h1>
+    <hr>
+    <h3><a class="btn btn-primary  pl " href="/h" style="float:left">BACK</a></h3>
+</div>
+
+
+<div class="row">
+  <div class="col-md-3"></div>
+
+
+<div  class="col-md-5" style="color:white">
+    <h1 class="ltext-108 cl2 hov-cl1 trans-04">{{ post.title }}</h1>
+    <h5>posted by : <b>{{ post.aut }}</b></h5>
+    <small>
+        {{ post.created_on.date }}
+       
+  
+    </small>
+    <div class="card p-3">
+    <p style="background: black ; padding: 1%; margin :2%; color:lightgray">{{ post.body }}</p>
+    </div>
+    {% if user.username == post.aut or user.is_superuser %}
+    <hr>
+    <form action="delete" style="display: inline-block;margin: 1%">
+        <button class="flex-c-m stext-101 cl0 size-90 bg5 bor2 hov-btn3 p-lr-15 trans-04" style="background-color: red">
+                                    Delete
+                                </button>
+
+    </form>
+    <form action="edit" style="display: inline-block;margin: 1%">
+            <button class="flex-c-m stext-101 cl0 size-90 bg3 bor2 hov-btn3 p-lr-15 trans-04" >
+                                    edit
+                                </button>
+
+        </form>
+    {% endif %}
+    
+    <hr>
+  <!--   action="/{{ post.pk }}/"  -->
+    <h3 style="color:black">Leave a comment:</h3>
+    <form  method="post">
+        {% csrf_token %}
+    
+        <input type="text" name="author" value="{{user.username}}" style="visibility: hidden;">
+        <div class="form-group cl">
+           <p  style="padding: 1%; margin :1%">{{ form.body }}</p> 
+        </div>
+        <button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
+                                    Post Comment
+                                </button>
+    </form>
+ <hr>
+    <h3  class="cl" style="color:black"><b>Comments:</b></h3>
+    {% for comment in comments %}
+    <p  class="p-t-5" style="color:#6666ff">
+        On {{comment.created_on.date }}&nbsp;
+        <b>{{ user.username}}</b> ,wrote:           
+
+    </p>
+    <p style="background-color: whitesmoke;color:black" class="p-t-5 p-b-5 m-t-5" >{{ comment.body }}</p>
+    <hr>
+      {% endfor %}
+  <div class="col-md-3"></div>
+</div></div>
+    
+  
+    
+</div>
+{% endblock %}

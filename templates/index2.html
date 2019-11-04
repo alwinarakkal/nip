@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login </title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'bootstrap/Login_v17/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/Login_v17/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/Login_v17/fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/Login_v17/fonts/Linearicons-Free-v1.0.0/icon-font.min.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/Login_v17/vendor/animate/animate.css'%}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/Login_v17/vendor/css-hamburgers/hamburgers.min.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/Login_v17/vendor/animsition/css/animsition.min.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/Login_v17/vendor/select2/select2.min.css'%}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/Login_v17/vendor/daterangepicker/daterangepicker.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/Login_v17/css/util.css'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/Login_v17/css/main.css'%}">
+<!--===============================================================================================-->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link  href='https://fonts.googleapis.com/css?family=Kaushan Script' rel='stylesheet'>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<style>
+	header {
+  height: 5.5em;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.content
+{
+	min-height: 1000px;
+	overflow: hidden;
+	padding: 8em 3em;	
+}
+.top-line,
+.navigation
+{
+	width: 100%;
+	height: 2.5em;
+	margin: 0;
+	padding: 0;
+	/*overflow: hidden;*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #000000;
+  transition: top 0.2s ease-in-out;
+}
+.top-line {
+	z-index: 10;
+}
+.navigation
+{
+	height: 3em;
+	top: 2.5em;
+	background-color: lightgray;
+	/*z-index: 5;*/
+}
+.nav-top {
+  top: 0;
+}
+.top-up {
+  top: -2.5em;
+}
+.nav-up {
+  top: -5.5em;
+}</style>
+<script type="text/javascript">
+$(document).ready(function(){
+// Hide Header on on scroll down
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var navbarHeight = $('.navigation').outerHeight();
+$(window).scroll(function(event){
+    didScroll = true;
+});
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+function hasScrolled() {
+    var st = $(this).scrollTop();
+  
+    console.log('st', st)
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta)
+        return;
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight){
+        // Scroll Down
+      
+        // We want to hide both the red and black bars on scroll down every time
+        $('.navigation').removeClass('nav-top').addClass('nav-up');
+        $('.top-line').addClass('top-up');
+    } else {
+        // Scroll Up
+        if(st <= 50) {
+          // If we are 50px from the top of the screen then show the red and black bars.
+          $('.top-line').removeClass('top-up');
+          $('.navigation').removeClass('nav-up').removeClass('nav-top');
+        } else {
+          // If we are more than 50px from the top then we want to show only
+          // the red bar at the top of the screen
+          $('.navigation').removeClass('nav-up').addClass('nav-top');
+        }
+    }
+    lastScrollTop = st;
+}
+});//]]> 
+</script>
+
+<header class="nav-down" style="z-index: 3">
+   <div class="top-line" style="color:  #9999ff;line-height: 2.5;font-family: Kaushan Script"> <b>SMART APP</b></div>
+  <div class="navigation " >
+    
+         <ul class="" style="float: right;">
+              <li class="nav-item" style="display: inline-block;color:black">
+                <a class="nav-link "  href="/index" style="color:#6666ff;">Home</a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item" style="display: inline-block;color:black">
+                <a class="nav-link"  href="/profile"  >Me</a>
+              </li>
+              
+              <li class="nav-item" style="display: inline-block;color:black">
+                <a class="nav-link"  href="/shop" >Shop</a>
+              </li>    
+              <li class="nav-item" style="display: inline-block;color:black">
+                <a class="nav-link"  href="/req" >Services</a>
+              </li>    
+              <li class="nav-item" style="display: inline-block;color:black">
+                <a class="nav-link"  href="/accounts/logout" style="color:red" >Logout</a>
+              </li>   
+               {% endif %}           
+          </ul>
+
+          
+  </div>
+</header>
+
+{% block page_content %}
+
+{% endblock %} 
+<div class="flex-container " style="background-color:black;color:white; left: 0; bottom: 0; width: 100%;z-index:3;height:5%">
+
+
+ <footer  >
+  
+ <center>Copywright <b>SMART APP</b> All rights reserved <a href="https://www.google.co.in/">
+  HELP-LINK</a></center>
+</footer> 
+</div>
+
+</html>
