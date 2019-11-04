@@ -161,26 +161,42 @@ def shopmail(request):
 @login_required
 def Myreqview(request):              #display service requests
 
-    query_results = Post.objects.all().order_by('-created')
+   
+    req=Post.objects.all().order_by('-created')
     aut=request.user.username
-                                                    #pagination
-    paginator=Paginator(query_results,5)
+    info=[]
+    for x in req:
+        y={'flnum':x.created,'aut':x.aut,'aut2':aut}
+        info.append(y)
+    
+   
+    paginator=Paginator(info,5)
     try:
         page = int(request.GET.get('page','1'))
     except:
         page = 1
     try:
-        query_results = paginator.page(page)
+        info = paginator.page(page)
     except(EmptyPage, InvalidPage):
-        query_results=paginator.page(paginator.num_pages)
-                                                     #/pagination                   
+        info=paginator.page(paginator.num_pages)
 
-    context = {
-        'details':query_results,
-        'aut':aut
-    }
-    return render(request, 'show.html',context)
+    context={
+            'info':info,
+            
+        }   
+    return render(request,'show.html',context)
 
+class ServiceListView(ListView):
+    model = Post
+    template_name = 'show2.html'
+
+    def get_queryset(self):
+
+        category5= self.kwargs.get('category')
+    
+        return Post.objects.filter(created=category5)
+
+        
 @login_required
 def MyView(request):                #display ordered items
 
