@@ -6,7 +6,7 @@
     <table>
         {{ form.as_table }}
     </table>
-    <input type="submit" name="add" value="Add" />
+    <input type="submit" onclick="this.disabled=true"  name="add" value="Add" />
 </form>
 
 <!-- blog/templates/blog/blog_post.html: -->
@@ -45,6 +45,6 @@
     <table>
         {{ form.as_table }}
     </table>
-    <input type="submit" name="submit" value="Submit" />
+    <input type="submit" onclick="this.disabled=true"  name="submit" value="Submit" />
 </form>
 
