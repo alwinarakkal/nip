@@ -37,7 +37,7 @@
     
     
   {% for order in object_list %}
-    
+      {% if order.qu %}
       
         
           
@@ -54,7 +54,7 @@
               
            </tr> 
 
-        
+        {% endif %}
       
     {% endfor %}  
     

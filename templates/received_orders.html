@@ -27,45 +27,29 @@
 		
 			<tbody>
 		
-		{% for x in object_list %}
-					
-					
-					{% if x.bread or x.water or x.milk or x.rice %}
+  {% for order in object_list %}
+    
+      {% if order.qu %}
+        
+          
+          <tr>
+                <td > 
+                <b> Item : </b> {{ order.t }}</td>
+                <td>
 
-					<tr>
-						<td><b>DATE : </b>{{ x.created }}</td> 
-						
-					<td style="color:black">ORDERS :</td>
-					{% if x.get_total %}
-				<td style="color:green"> <b>Total :</b> ₹ {{ x.get_total }}</td>
+                <b>Quantity: </b>  {{ order.qu }}
+    
+                       
+                    
+               </td>
+              
+           </tr> 
 
-					{% if x.bread %}
-					<td>{{x.bread}} PACKET BREAD,</td>	
-					{% endif %}
-					{% if x.water %}
-					
-					<td>{{x.water}} CAN WATER,</td>	
-					{% endif %}
-					
-
-
-					{% if x.milk  %}
-					
-					<td>{{x.milk}}  PACKET MILK,</td>	
-					{% endif %}
-
-					{% if x.rice  %}
-					
-					<td>{{x.rice}} kg RICE,</td>	
-					{% endif %}
-
-					{% endif %}	
-					{% endif %}	
-					<br>
-					
-				
-		{% endfor %}
-		 </tr>
+        
+        {% endif %}
+      
+    {% endfor %} 
+		 
 </tbody>
 	</div></table>  
 

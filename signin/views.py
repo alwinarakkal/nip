@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import UserProfile
-from ser.models import Item,Service                                   ######for admin login
+from ser.models import Quantity,Service                                   ######for admin login
 from django.views.generic import ListView, DetailView, View
 from django.core.paginator import Paginator
 from .forms import ExtendedUserCreationForm, UserProfileForm,Editprofile
@@ -77,7 +77,7 @@ def index(request):
 @login_required
 def deliver_item(request):
 
-        order_list=Item.objects.all().order_by('-created')
+        order_list=Quantity.objects.all().order_by('-created')
         info=[]
         for x in order_list:
             y={'flnum':x.flat_number}
@@ -124,7 +124,7 @@ def deliver_service(request):
 class caretaker(LoginRequiredMixin,ListView):
     login_url = '/index/'
     
-    model = Item
+    model = Quantity
     template_name = 'received_orders.html'
 
 
@@ -134,7 +134,7 @@ class caretaker(LoginRequiredMixin,ListView):
 
         category = self.kwargs.get('category')
         
-        return Item.objects.filter(flat_number=category)
+        return Quantity.objects.filter(flat_number=category)
 
 
 
