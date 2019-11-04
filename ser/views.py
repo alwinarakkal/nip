@@ -240,14 +240,14 @@ class CategoryListView(ListView):
 
 
 
-def shop_index(request):
+# def shop_index(request):
        
 
-    items = Item.objects.all()
-    print
-    context = {
+#     items = Item.objects.all()
+    
+#     context = {
 
-        'items':items
-    }
+#         'items':items
+#     }
 
-    return render(request, 'test.html', context)
+#     return render(request, 'test.html', context)

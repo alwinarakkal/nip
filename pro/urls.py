@@ -15,7 +15,7 @@ urlpatterns = [
     path('',include('blog.urls')),
     path('residents/',views.residents,name="residents"),
     path('category3/<category>', views.CategoryListView.as_view(), name='category-list'),
-    path('test/',views.shop_index),
+    # path('test/',views.shop_index),
     path('category5/<category>', views.ServiceListView.as_view(), name='serv_view'),
     path('category6/<category>', views.ShopListView.as_view(), name='shop_view'),
     
