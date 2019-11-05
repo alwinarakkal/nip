@@ -149,8 +149,9 @@ def Myreqview(request):              #display service requests
     aut=request.user.username
     info=[]
     for x in req:
-        y={'flnum':x.created,'aut':x.aut,'aut2':aut}
-        info.append(y)
+        if x.aut==aut:
+            y={'flnum':x.created,'aut':x.aut,'aut2':aut}
+            info.append(y)
     
    
     paginator=Paginator(info,5)
@@ -190,25 +191,26 @@ def MyView(request):                #display ordered items
     info=[]
    
     for x in query_results:
-        y={'flnum':x.created,'aut':x.author,'aut2':aut}
-        info.append(y)
-    
+        if x.author==aut:
+            y={'flnum':x.created,'aut':x.author,'aut2':aut}
+            info.append(y)
+        
 
    
-    paginator=Paginator(query_results,5)
+    paginator=Paginator(info,5)
     try:
         page = int(request.GET.get('page','1'))
     except:
         page = 1
     try:
-        query_results = paginator.page(page)
+        info = paginator.page(page)
     except(EmptyPage, InvalidPage):
-        query_results=paginator.page(paginator.num_pages)
-                                                        #/pagination
-    context = {
-        'info':info,
-        
-    }
+        info=paginator.page(paginator.num_pages)
+
+    context={
+            'info':info,
+            
+        }   
     return render(request, 'display.html',context)
 
 class ShopListView(ListView):

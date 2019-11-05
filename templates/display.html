@@ -32,7 +32,7 @@
 		
 		{% for y in info %}
 		
-			{% if  y.aut2 == y.aut %}		
+			{% if y.aut2 == y.aut %}		
 				
 					
 					<tr>
@@ -48,7 +48,7 @@
 							
 			 		 </tr> 
 				
-				{% endif %}		
+			{% endif %}		
 					
 		{% endfor %}	
 		
@@ -57,22 +57,24 @@
 	</div></table></div>
 
 </div>
-		<div class="pagination p-t-30"  style="left: 0; bottom: 5%; width: 100%;z-index:3;">
+		<div class="pagination p-t-30"  style=" left: 0; bottom: 5%; width: 100%;z-index:3;">
 				<ul style="margin-left: 45%">
-					
-					{% if details.has_previous %}
-					<li style="display:inline-flex"><a href="?page={{ details.previous_page_number }}" style="color:#1a75ff"><strong><<</strong> &nbsp &nbsp</a></li>
-					{% endif %}
-					{% for pg in details.paginator.page_range %}
-					{% if details.number == pg %}
-			<a href="?page={{ pg }}" style="color:#1a75ff">{{ pg }}</a>
-				
-					{% endif %}
-					{% endfor %}
-					{% if details.has_next %}
-					<li style="display:inline-flex"><a href="?page={{ details.next_page_number }}" style="color:#1a75ff"><strong>&nbsp &nbsp >></strong>   </a></li>
-					{% endif %}
-				</ul>
-		</div>
+		
+			
+			{% if info.has_previous %}
+			<li style="display:inline-flex"><a href="?page={{ info.previous_page_number }}" style="color:#1a75ff"><strong><<</strong> &nbsp &nbsp</a></li>
+			{% endif %}
+			{% for pg in info.paginator.page_range %}
+			{% if info.number == pg %}
+	<a href="?page={{ pg }}" style="color:#1a75ff">{{ pg }}</a>
+		
+			{% endif %}
+			{% endfor %}
+			{% if info.has_next %}
+			<li style="display:inline-flex"><a href="?page={{ info.next_page_number }}" style="color:#1a75ff"><strong>&nbsp &nbsp >></strong>   </a></li>
+			{% endif %}
+		</ul>
+</div>
+
 
 	{% endblock %}
