@@ -1,5 +1,5 @@
 from django import forms
-from .models import Service,Quantity
+from .models import Service,Quantity,Item
 from django.contrib.auth.models import User
 
 
@@ -13,3 +13,8 @@ class buy(forms.ModelForm):     #new
         model = Quantity               #new
         fields = '__all__'           #new
     
+
+class item_form(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = '__all__'

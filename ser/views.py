@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.views.generic import ListView, DetailView, View
 from .forms import ser_req
 from .forms import buy
+from .forms import item_form
 from django.core.paginator import Paginator
 from datetime import date,timedelta
 
@@ -15,6 +16,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
+from django.contrib import messages
 
 @login_required
 def req(request):
@@ -43,12 +45,13 @@ def shop(request):
     current_user=request.user
     obj=UserProfile.objects.get(user=current_user)
     flat_number=obj.flat_number
-    
+  
     if request.method == "POST":
         form = buy(request.POST,initial={'author':aut,'flat_number':flat_number})     #neww for admin login
         if form.is_valid():
             
             form.save()
+            messages.info(request, "Item ordered successfully.")
             return redirect('gmail')
 
     else:
@@ -105,14 +108,15 @@ def shopmail(request):
     
     # obj2=Post.objects.filter(aut=current_user).order_by('created')[:1]
     obj2=Quantity.objects.last()
-    item=str(obj2.t)
-    quantity=str(obj2.qu)
-
-    
+    item=str(obj2.item)
+    quantity=str(obj2.quantity)
+    total=obj2.quantity*obj2.item.price
+    price=str(total)
+    print(total)
     z="FLAT NUMBER :"+x+"\n"+"MOBILE NUMBER :"+y+"\n"
     
     
-    shoppinglist=(z+" Order Summary:"+"\n"+"Quantity : "+quantity +",  Item : "+item)
+    shoppinglist=(z+" Order Summary:"+"\n"+"Quantity : "+quantity +",  Item : "+item+", Price : "+price)
     
     context = {
         'details':shoppinglist
@@ -126,7 +130,7 @@ def shopmail(request):
     email_from = settings.EMAIL_HOST_USER
     recipient_list = ['aalwinarakkal@gmail.com',mail] 
     
-    if (obj2.qu):
+    if (obj2.quantity):
         send_mail( subject, message, email_from, recipient_list )    
     
    
@@ -184,6 +188,8 @@ def MyView(request):                #display ordered items
     for x in query_results:
         y={'flnum':x.created,'aut':x.author,'aut2':aut}
         info.append(y)
+    
+
    
     paginator=Paginator(query_results,5)
     try:
@@ -204,14 +210,23 @@ def MyView(request):                #display ordered items
 class ShopListView(ListView):
     model = Quantity
     template_name = 'display2.html'
+    
 
     def get_queryset(self):
-        
+   
         category6= self.kwargs.get('category')
     
-        return Quantity.objects.filter(created=category6)
+        return Quantity.objects.filter(created=category6,author=self.request.user)
 
 
+
+# def validate_user(request):
+#     query_results = Quantity.objects.filter(author=request.user.username).order_by('-created')
+#     context = {
+
+#         "query_results":query_results
+#     }
+#     return render(request,'display2.html',context)
 
 @login_required
 def residents(request): 
@@ -239,6 +254,29 @@ class CategoryListView(ListView):
         return UserProfile.objects.filter(flat_number=category)
 
 
+@login_required
+def add_item(request):                                             
+    # items = Item.objects.all()
+    # aut=request.user.username
+    # current_user=request.user
+    # obj=UserProfile.objects.get(user=current_user)
+    # flat_number=obj.flat_number
+    
+    if request.method == "POST":
+        form = item_form(request.POST)     #neww for admin login
+        if form.is_valid():
+            
+            form.save()
+            return redirect('index')
+
+    else:
+        form = item_form()
+    context = {
+        'form':form,
+        
+    }
+    
+    return render(request, 'add_item.html', context)
 
 # def shop_index(request):
        

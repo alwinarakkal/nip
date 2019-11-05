@@ -34,30 +34,52 @@
   <div class="row pl" >
     
       <tbody>
-    
-    
+    <script type="text/javascript">
+      var t =0
+    </script>
+     <tr>
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Total Bill </th>
+  </tr>
   {% for order in object_list %}
-      {% if order.qu %}
+      {% if order.quantity %}
       
         
           
           <tr>
                 <td > 
-                <b> Item : </b> {{ order.t }}</td>
+               {{ order.item }}</td>
                 <td>
 
-                <b>Quantity: </b>  {{ order.qu }}
-    
+                {{ order.quantity }}
+
+              <td >
+                <b id="{{forloop.counter0}}"> </b>  
+              </td>
+              <td >
+                <b id="so"> </b>  
+              </td>
                        
-                    
-               </td>
+              <script>
+                  var x = {{ order.item.price }};
+                  var y = {{ order.quantity }};
+                  var z = x * y;
+                  var t = z+t
+                  document.getElementById("{{forloop.counter0}}").innerHTML = 'Price :'+z;
+                  document.getElementById("so").innerHTML = t;
+              </script>           
+             
               
            </tr> 
 
         {% endif %}
       
     {% endfor %}  
-    
+                  
+                <b id="so"> </b>  
+            
     
 </tbody>
   </div></table></div>

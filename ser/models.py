@@ -30,11 +30,13 @@ class Item(models.Model):
 class Quantity(models.Model):
     # author = models.ForeignKey(User, on_delete=models.CASCADE)
     author = models.CharField(max_length=50)
-    qu = models.IntegerField()
-    t = models.ForeignKey('Item', on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    item = models.ForeignKey('Item', on_delete=models.CASCADE)
     flat_number = models.CharField(max_length=30)
     created= models.DateField(auto_now_add=True)
     time1 = models.DateTimeField(auto_now_add=True)
 
     # flat_number = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.author
