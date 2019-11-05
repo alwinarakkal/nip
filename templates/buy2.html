@@ -112,7 +112,7 @@
 
 
 {% endif %}
-	<form class=" form-signin p-b-30" method="POST" >
+	<form class=" form-signin p-b-30" onsubmit="names.disabled = true; return true" method="POST" >
 		 {% csrf_token %}
 
 		 <div class="form-group" style="visibility:hidden">
@@ -175,7 +175,7 @@
 
 
 
-							<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"  type="submit"  onclick="this.disabled=true" value="Submit" style="visibility:hidden" id="b">
+							<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"  type="submit"  name="names" value="Submit" style="visibility:hidden" id="b">
 							Place Order
 						</button>
 						</div>

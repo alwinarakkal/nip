@@ -44,14 +44,14 @@
     <hr>
   <!--   action="/{{ post.pk }}/"  -->
     <h3 style="color:black">Leave a comment:</h3>
-    <form  method="post">
+    <form  method="post" onsubmit="names.disabled = true; return true">
         {% csrf_token %}
     
         <input type="text" name="author" value="{{user.username}}" style="visibility: hidden;">
         <div class="form-group cl">
            <p  style="padding: 1%; margin :1%">{{ form.body }}</p> 
         </div>
-        <button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04" onclick="this.disabled=true">
+        <button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04" name="names">
                                     Post Comment
                                 </button>
     </form>

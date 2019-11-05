@@ -20,7 +20,7 @@
         <div class="row">
           <div class="col-md-4 ">&nbsp</div>
             <div class="card p-t-30 p-l-30 p-r-30 p-b-30 ">
-             <form class="form-signin pl" method="POST" >
+             <form class="form-signin pl" onsubmit="names.disabled = true; return true" method="POST" >
                  {% csrf_token %}
                 
                 <div class="form-group"  >
@@ -38,7 +38,7 @@
             
             
           <hr />
-            <input type="submit"  onclick="this.disabled=true" value="Submit" class="button" style="display:inline">
+            <input type="submit" name="names"  value="Submit" class="button" style="display:inline">
                </form>
              </div>
                <div class="col-md-4"></div></div>

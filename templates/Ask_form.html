@@ -11,7 +11,7 @@
  <body>
 
 <div class="jumbotron" style="background-color:#a3c2c2">
-  <h1 style="font-family: 'Cormorant', serif;"><br><center>SERVICE</center></h1>
+  <h1 style="font-family: 'Cormorant', serif;"><br><center>SERVICE REQUEST</center></h1>
   
 
 </div>
@@ -20,13 +20,13 @@
         <div class="row">
           <div class="col-md-3"></div>
 
-             <form class="form-signin pl" method="POST" >
+             <form class="form-signin pl" onsubmit="names.disabled = true; return true" method="POST" >
                  {% csrf_token %}
                  <div class="form-group"  style="  visibility: hidden;">
                   {% render_field form.aut  type="text" class="form-control" placeholder="Title"%}
                   {% render_field form.flat_number  type="text" class="form-control" placeholder="flat"%}
               </div>
-                <div class="form-group"  >
+                <div class="form-group"  ><b>Pick a date : </b>
              <input type="date" name="time" class="form-control" placeholder="Preferred time " required="">
                 
               </div>
@@ -37,7 +37,7 @@
               </div>
             
           <hr />
-            <input type="submit"  onclick="this.disabled=true" value="Submit" class="button" style="display:inline">
+            <input type="submit"  name="names" value="Submit" class="button" style="display:inline">
                </form>
                <div class="col-md-3"></div></div>
              </div>
