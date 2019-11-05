@@ -88,13 +88,13 @@ def serv_mail(request):
     mg=obj2.time
     s=str(mg)
     
-    z="flat number :"+x+"\n"+"mobile number  :"+y+"\n"+"problem: "+p+"\n"+"Time: "+s
+    z="flat number :"+x+"\n"+"mobile number  :"+y+"\n"+"problem: "+p+"\n"+"Date: "+s
 
     subject = 'Service request posted'
     message=z
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['aalwinarakkal@gmail.com',mail] 
-    
+    recipient_list = [mail] 
+    print(recipient_list)
     send_mail( subject, message, email_from, recipient_list )    
     return redirect('show')
 
@@ -132,7 +132,7 @@ def shopmail(request):
     subject = 'You have orders'
     message=shoppinglist
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['aalwinarakkal@gmail.com',mail] 
+    recipient_list = [mail] 
     
     if (obj2.quantity):
         send_mail( subject, message, email_from, recipient_list )    
