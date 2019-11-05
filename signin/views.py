@@ -9,6 +9,8 @@ from .forms import ExtendedUserCreationForm, UserProfileForm,Editprofile
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import requests
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def index(request):
@@ -172,7 +174,14 @@ def register(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-
+            mail=request.user.email
+            
+            subject = 'Account Created'
+            message='Congrats,you have successfully created an account in smart app'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [mail] 
+            
+            send_mail( subject, message, email_from, recipient_list )  
             return redirect('index')
 
 
