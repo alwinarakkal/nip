@@ -10,6 +10,8 @@
 <head>
 	<title>Shoping Cart</title>
 	<meta charset="UTF-8">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.11/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.11/js/select2.min.js"></script>
 </head>
 
 <style type="text/css">
@@ -41,7 +43,13 @@
 		
 	<body>
 				<script type="text/javascript">
+
 			$(document).ready(function() {
+    			$('.js-example-basic-single').select2();
+			});
+			$(document).ready(function() {
+
+
 			$('.minus').click(function () {
 				var $input = $(this).parent().find('input');
 				var count = parseInt($input.val()) - 1;
@@ -125,7 +133,7 @@
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
 						<div class="wrap-table-shopping-cart">
-							<table class="table-shopping-cart">
+							<table class="table-shopping-cart table-responsive" style="overflow:scroll;">
 								<tr class="table_head">
 									<th class="column-1">Product</th>
 									<th class="column-2">Brand</th>
@@ -137,9 +145,14 @@
 
 								<tr class="table_row">
 									<td class="column-1">
-										
-											{% render_field form.item  type="text" class="form-control" placeholder="aut"%}
-										
+										<!-- <div class="scrollable">
+											{% render_field form.item  type="text" class="form-control" placeholder="aut"  %}
+										</div> -->
+										<select class="js-example-basic-single form-control" id="id_item" name="item">
+											{% for item in items %}
+											<option value="{{item}}" >{{item}}</option>
+											{% endfor %}
+										</select>
 									</td>
 									<td class="column-2"><p id='item_brand'></p></td>
 									<td class="column-3">	<p id="item_price"></p></td>

@@ -48,14 +48,18 @@ def shop(request):
   
     if request.method == "POST":
         form = buy(request.POST,initial={'author':aut,'flat_number':flat_number})     #neww for admin login
+       
         if form.is_valid():
             
             form.save()
+            
             messages.info(request, "Item ordered successfully.")
             return redirect('gmail')
 
     else:
+       
         form = buy(initial={'author':aut,'flat_number':flat_number})
+
     context = {
         'form':form,
         'items':items,
@@ -112,7 +116,7 @@ def shopmail(request):
     quantity=str(obj2.quantity)
     total=obj2.quantity*obj2.item.price
     price=str(total)
-    print(total)
+    
     z="FLAT NUMBER :"+x+"\n"+"MOBILE NUMBER :"+y+"\n"
     
     
@@ -235,7 +239,7 @@ def residents(request):
     for x in tenants:
         y={'flnum':x.flat_number}
         info.append(y)
-    print(info)
+    
     context={
             'info':info
         }    
@@ -256,27 +260,25 @@ class CategoryListView(ListView):
 
 @login_required
 def add_item(request):                                             
-    # items = Item.objects.all()
-    # aut=request.user.username
-    # current_user=request.user
-    # obj=UserProfile.objects.get(user=current_user)
-    # flat_number=obj.flat_number
-    
-    if request.method == "POST":
-        form = item_form(request.POST)     #neww for admin login
-        if form.is_valid():
-            
-            form.save()
-            return redirect('index')
+   
+    if request.user.groups.filter(name__in=['keeper']).exists():
+        if request.method == "POST":
+            form = item_form(request.POST)     #neww for admin login
+            if form.is_valid():
+                
+                form.save()
+                return redirect('index')
 
-    else:
-        form = item_form()
-    context = {
-        'form':form,
+        else:
+            form = item_form()
+        context = {
+            'form':form,
+            
+        }
         
-    }
-    
-    return render(request, 'add_item.html', context)
+        return render(request, 'add_item.html', context)
+    else :
+        return redirect('/login')
 
 # def shop_index(request):
        
