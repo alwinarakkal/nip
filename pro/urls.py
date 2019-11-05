@@ -12,7 +12,7 @@ urlpatterns = [
     path('show/',views.Myreqview,name="show"),
     path('gmail/',views.shopmail,name="gmail"),
     path('',include('signin.urls')),
-    path('',include('blog.urls')),
+    path('',include('notice.urls')),
     path('residents/',views.residents,name="residents"),
     path('category3/<category>', views.CategoryListView.as_view(), name='category-list'),
     path('add_item/',views.add_item,name='add_item'),
