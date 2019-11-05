@@ -26,7 +26,13 @@
 	<div class="row pl " >
 		
 			<tbody>
-	
+	<tr>
+    <!-- <th>Time</th> -->
+    <th>Order Date</th>
+    <th>Service Date</th>
+    <th>Requested Service</th>
+   
+  </tr>
 		{% for x in object_list %}
 					
 				
@@ -34,13 +40,13 @@
 					<tr>
 						
 							<td> 
-								<b>DATE : </b>{{ x.created }}
+								{{ x.created }}
 							 </td>
 							 <td> 
-								<b>TIME : </b>{{ x.time }}
+								{{ x.time }}
 							 </td>				
 						
-						<td style="color:black">SERVICE REQUESTED :</td> 
+						
 						
        					  <td> 
 								{{ x.body }}

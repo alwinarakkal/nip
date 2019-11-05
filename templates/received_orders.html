@@ -20,38 +20,65 @@
 <div class="container-fluid" style="padding-left: 10%;padding-right: 10%;">
 <div class="card p-3">
 
+<table class="table table-bordered table-striped table-hover table-responsive" style="border-width: 10px">
 
-<table class="table table-bordered table-striped table-hover table-responsive " style="border-width: 10px">
-
-	<div class="row pl" >
-		
-			<tbody>
-		
-  {% for order in object_list %}
+  <div class="row pl" >
     
-      {% if order.qu %}
+      <tbody>
+    <!-- <script type="text/javascript">
+      var t =0
+    </script> -->
+     <tr>
+    <!-- <th>Time</th> -->
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Flat Number</th>
+    <th>Date</th>
+   <!--  <th>Total Bill </th> -->
+  </tr>
+  {% for order in object_list %}
+      {% if order.quantity %}
+      
         
           
           <tr>
                 <td > 
-                <b> Item : </b> {{ order.t }}</td>
+               {{ order.item }}</td>
                 <td>
 
-                <b>Quantity: </b>  {{ order.qu }}
-    
+                {{ order.quantity }}
+
+              <td >
+                <b id="{{forloop.counter0}}"> </b>  
+              </td>
+             
                        
-                    
-               </td>
-              
+              <script>
+                  var x = {{ order.item.price }};
+                  var y = {{ order.quantity }};
+                  var z = x * y;
+                  // var t = z+t
+                  document.getElementById("{{forloop.counter0}}").innerHTML = z;
+                  // document.getElementById("so").innerHTML = t;
+              </script>           
+              <td > 
+               {{ order.flat_number }}</td>
+              <td > 
+               {{ order.time1 }}</td>
+               
            </tr> 
 
-        
         {% endif %}
       
-    {% endfor %} 
-		 
+    {% endfor %}  
+                  
+                <!-- <b id="so"> </b>   -->
+            
+    
 </tbody>
-	</div></table>  
+  </div></table>
+
 
 </div></div>
 
