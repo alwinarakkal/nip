@@ -41,7 +41,7 @@
     <th>Item</th>
     <th>Quantity</th>
     <th>Price</th>
-    <th>Total Bill </th>
+    <th style="color:green">Final Bill</th>
   </tr>
   {% for order in object_list %}
       {% if order.quantity %}
@@ -56,10 +56,10 @@
                 {{ order.quantity }}
 
               <td >
-                <b id="{{forloop.counter0}}"> </b>  
+                <b id="{{forloop.counter0}}" > </b>  
               </td>
               <td >
-                <b id="so"> </b>  
+                <b id="so" style="color:green"> </b>  
               </td>
                        
               <script>
@@ -78,7 +78,7 @@
       
     {% endfor %}  
                   
-                <b id="so"> </b>  
+               <!--  <b id="so"> </b>   -->
             
     
 </tbody>
