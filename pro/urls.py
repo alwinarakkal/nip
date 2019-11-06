@@ -19,5 +19,6 @@ urlpatterns = [
     path('category5/<category>', views.ServiceListView.as_view(), name='serv_view'),
     path('category6/<category>', views.ShopListView.as_view(), name='shop_view'),
     # path('category6/<category>',views.validate_user,name='shop_name')
+   
     
 ]

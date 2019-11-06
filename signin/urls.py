@@ -14,6 +14,8 @@ urlpatterns = [
             path('service_ct',views.deliver_service,name="service_ct"),
             path('category/<category>', views.caretaker.as_view(), name='caretaker'),
             path('category2/<category>', views.caretaker2.as_view(), name='caretaker2'),
+            path('display_items/',views.display_items,name='display_items'),
+            path('category8/<category>', views.ItemListView.as_view(), name='detail_items'),
             
 
             url('', include('django.contrib.auth.urls')),

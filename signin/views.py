@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import UserProfile
-from ser.models import Quantity,Service                                   ######for admin login
+from ser.models import Quantity,Service,Item                                  ######for admin login
 from django.views.generic import ListView, DetailView, View
 from django.core.paginator import Paginator
 from .forms import ExtendedUserCreationForm, UserProfileForm,Editprofile
@@ -286,3 +286,28 @@ def profile(request):
 
     return render(request, 'pro.html', context)
 
+
+@login_required
+def display_items(request): 
+    items=Item.objects.all()
+    info=[]
+    for x in items:
+        y={'name':x.item_name}
+        info.append(y)
+    
+    context={
+            'info':info
+        }    
+    return render(request,'item_list.html',context)
+
+
+
+class ItemListView(ListView):
+    model = Item
+    template_name = 'item_info.html'
+
+    def get_queryset(self):
+
+        category8 = self.kwargs.get('category')
+
+        return Item.objects.filter(item_name=category8)

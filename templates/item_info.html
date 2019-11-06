@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+
+
+
+{% load static %}
+
+{% block page_content %}
+
+
+<body>
+
+
+
+<div class="jumbotron" style="background-color:#a3c2c2">
+  <h1 style="font-family: 'Cormorant', serif;"><br><center>Item Details</center></h1>
+  
+
+</div>
+
+{% for item in object_list %}
+<section class="bg0 p-t-40 p-b-116">
+    <div class="container " >
+      <!-- <div class="flex-w flex-tr"> -->
+      
+
+        <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md card" style="margin-left: 20%;margin-right: 20%">
+          
+
+          <div class="flex-w w-full p-b-42">
+            <span class="fs-18 cl5 txt-center size-211">
+              <span class="lnr lnr-cart"></span>
+            </span>
+
+            <div class="size-212 p-t-2">
+              <span class="mtext-110 cl2">
+                Item Name
+              </span>
+
+              <p class="stext-115 cl1 size-213 p-t-18">
+                {{item.item_name}}
+              </p>
+            </div>
+
+          </div>
+          <div class="flex-w w-full p-b-42">
+            <span class="fs-18 cl5 txt-center size-211">
+              <span class="lnr lnr-bookmark"></span>
+            </span>
+
+            <div class="size-212 p-t-2">
+              <span class="mtext-110 cl2">
+                Brand
+              </span>
+
+              <p class="stext-115 cl1 size-213 p-t-18">
+                {{item.brand}}
+              </p>
+            </div>
+            
+          </div>
+
+
+          <div class="flex-w w-full">
+            <span class="fs-18 cl5 txt-center size-211">
+           <span class="lnr lnr-tag"></span>
+            </span>
+
+            <div class="size-212 p-t-2">
+              <span class="mtext-110 cl2">
+                Price
+              </span>
+
+              <p class="stext-115 cl1 size-213 p-t-18">
+                {{item.price}}
+              </p>
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
+    </div>
+  </section>  
+  {%  endfor %}
+
+
+      </body>
+      {% endblock %}
