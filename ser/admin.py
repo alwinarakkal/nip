@@ -20,6 +20,7 @@ class ServiceAdmin(admin.ModelAdmin):
       'aut',
       'flat_number',
       'created',
+      'time',
   ]
 
 

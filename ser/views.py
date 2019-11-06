@@ -178,7 +178,7 @@ class ServiceListView(ListView):
 
         category5= self.kwargs.get('category')
     
-        return Service.objects.filter(created=category5)
+        return Service.objects.filter(created=category5).order_by('-created')
 
         
 @login_required

@@ -128,6 +128,7 @@ class caretaker(LoginRequiredMixin,ListView):
     
     model = Quantity
     template_name = 'received_orders.html'
+    paginate_by = 8
 
 
 
@@ -136,7 +137,7 @@ class caretaker(LoginRequiredMixin,ListView):
 
         category = self.kwargs.get('category')
         
-        return Quantity.objects.filter(flat_number=category)
+        return Quantity.objects.filter(flat_number=category).order_by('-created')
 
 
 
@@ -145,14 +146,14 @@ class caretaker2(LoginRequiredMixin,ListView):
    
     model = Service
     template_name = 'received_orders2.html'
-    
+    paginate_by = 5
     def get_queryset(self):
 
         category = self.kwargs.get('category')
-        # print (category)
+       
         
         
-        return Service.objects.filter(flat_number=category)
+        return Service.objects.filter(flat_number=category).order_by('-created')
 
 
 

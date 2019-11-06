@@ -74,13 +74,33 @@
     {% endfor %}  
                   
                 <!-- <b id="so"> </b>   -->
-            
+         
     
 </tbody>
   </div></table>
 
-
+    
 </div></div>
 
       </body>
+      <div class="pagination p-t-30"  style=" left: 0; bottom: 5%; width: 100%;z-index:3;">
+        <ul style="margin-left: 40%">
+    
+      {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/category/{{object_list.0.flat_number}}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/category/{{object_list.0.flat_number}}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    </ul>
+</div>
       {% endblock %}
