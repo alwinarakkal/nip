@@ -6,8 +6,9 @@ from .models import Service,Item,Quantity
 class QuantityAdmin(admin.ModelAdmin):
   list_display = [
       'author',
-      'quantity',
+      
       'item',
+      'quantity',
       'flat_number',
       'time1',
   ]
@@ -19,8 +20,9 @@ class ServiceAdmin(admin.ModelAdmin):
       
       'aut',
       'flat_number',
-      'created',
+      
       'time',
+      'created',
   ]
 
 
