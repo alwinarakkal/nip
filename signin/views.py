@@ -79,7 +79,7 @@ def index(request):
 @login_required
 def deliver_item(request):
 
-        order_list=Quantity.objects.all().order_by('-created')
+        order_list=Quantity.objects.all().order_by('-time1')
         info=[]
         for x in order_list:
             y={'flnum':x.flat_number}
