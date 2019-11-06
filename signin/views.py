@@ -294,6 +294,17 @@ def display_items(request):
     for x in items:
         y={'name':x.item_name}
         info.append(y)
+
+    
+    paginator=Paginator(info,5)
+    try:
+        page = int(request.GET.get('page','1'))
+    except:
+        page = 1
+    try:
+        info = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        info=paginator.page(paginator.num_pages)
     
     context={
             'info':info
